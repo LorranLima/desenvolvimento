@@ -1,0 +1,44 @@
+.headerHome {
+    margin-top: 10px;
+    position: relative;
+    background: $azul-medio;
+    height: 68px;
+    z-index: 10;
+     img {
+        display: inline-block;
+        position: absolute;
+        left: 10px;
+    }
+    @include box-shadow(0px 2px 4px rgba(68, 85, 102, 0.4))
+}
+
+.menu {
+    @include sizeTittle(14);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: right;
+    ul li  {
+        display: inline-block;
+        margin-top: 26px;
+    }
+    a {
+        margin-left: 30px;
+        color: $branco;
+    }
+    a:hover {
+        color: $cinza-5;
+        animation: animaHover .8s forwards;
+    }
+
+}
+
+@keyframes animaHover {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 0,-100px);
+    }
+    to {
+        opacity: 2;
+        transform: translate3d(0, 0, 0);
+    }
+}
