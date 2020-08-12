@@ -37,17 +37,13 @@ namespace TelaCadastro.Controllers
             return Json(listaalunoscidade);
         }
 
-        //public JsonResult GraficoAlunosPorHora()
-        //{
-        //    var listaalunos = new AlunoDal().ObterTodos();
+        public JsonResult GraficoAlunosPorDataHora(DateTime? datainicio, DateTime? datafim)
+        {
+            var listaalunos = new AlunoDal().ObterTodos();
 
-        //    var listaalunoscidade = listaalunos.Select(ent => new
-        //    {
-        //         = ent.nome,
-        //        qtdalunos = listaenderecos.Count(x => x.cidadeid == ent.cidadeid)
-        //    });
+            var listaalunoshora = listaalunos.Where(ent => ent.datacadastro >= datainicio && ent.datacadastro <= datafim);
 
-        //    return Json(listaalunoscidade);
-        //}
+            return Json(new { alunos = "Alunos", qtdalunos = listaalunoshora.Count() });
+        }
     }
 }

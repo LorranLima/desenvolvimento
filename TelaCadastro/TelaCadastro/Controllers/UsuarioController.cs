@@ -44,7 +44,7 @@ namespace TelaCadastro.Controllers
                     {
                         nome = viewmodel.nome,
                         cpf = viewmodel.cpf,
-                        //cidadeid = viewmodel.cidadeid,
+                        cidadeid = viewmodel.cidadeid,
                         sexo = viewmodel.sexo,
                         telefone = viewmodel.telefone,
                         email = viewmodel.email,

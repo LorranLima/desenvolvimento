@@ -29,26 +29,22 @@ namespace TelaCadastro.Controllers
                 Usuario u = serviceusuario.ObterPorLogin(f["email"]);
                 if (u != null)
                 {
-                    //if (Funcoes.getMD5Hash(f["senha"]).ToUpper() == u.senha.ToUpper())
-                    //{
                     if (f["senha"] == u.senha)
                     {
                         IncluiPessoaNaSessao(f["email"]);
 
-
                         return RedirectToAction("Index", "Home");
 
                     }
-                    //EnviarMensagem("Usuário ou Senha Incorreto(s)!", TipoMensagem.Vermelho);
                 }
                 else
                 {
-                    //EnviarMensagem("Usuário não encontrado!", TipoMensagem.Vermelho);
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
             {
-                //EnviarMensagem("Ocorreu um erro. Tente mais tarde.", TipoMensagem.Vermelho);
+                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");
