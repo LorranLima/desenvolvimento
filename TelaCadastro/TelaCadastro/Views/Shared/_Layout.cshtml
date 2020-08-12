@@ -20,9 +20,10 @@
                     <li>@Html.ActionLink("Alunos por Cidade", "Index", "AlunoCidade")</li>
                     <li>@Html.ActionLink("Relatórios", "Index", "Relatorio")</li>
                     <li>@Html.ActionLink("Gráficos", "Index", "Grafico")</li>
+                    <li style="width:100%;text-align:center;">@Html.ActionLink("Sair", "LogOff", "Login")</li>
                 </ul>
             </nav>
-            @*<button onclick="window.locatio.href='@Html.ActionLink("LogOff","Login")'">Sair</button>*@
+            @*<button type="button" class="botao botao-primario " style="float:right;margin-top:auto" onclick="window.location.href='@Url.Action("LogOff","Login")'">Sair</button>*@
         </div>
     </header>
     <div class="container body-content">

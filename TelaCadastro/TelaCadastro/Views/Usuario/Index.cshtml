@@ -1,8 +1,10 @@
 ﻿@model TelaCadastro.ViewModels.UsuarioViewModel
 @{
+    Layout = null;
     ViewBag.Title = "Cadastro de Usuário";
 }
 
+<link href="~/Content/style/style.css" rel="stylesheet" />
 
 <div class="container">
     <div class="painel">
@@ -70,6 +72,9 @@
 </div>
 
 @section Scripts{
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.mask.js"></script>
     <script>
         $(document).ready(function () {
             $("#cpf").mask("999.999.999-99");

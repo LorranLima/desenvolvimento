@@ -12,62 +12,54 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+            // Load the Visualization API and the corechart package.
+            google.charts.load('current', { 'packages': ['corechart'] });
 
-            $.post("Grafico/GraficoAlunosPorCidade")
-                .done(function (data) {
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
 
-                    data = getFormDataPadrao(data[0]);
-
-                    drawChart(data);
-                    // Load the Visualization API and the corechart package.
-                    google.charts.load('current', { 'packages': ['corechart'] });
-
-                    // Set a callback to run when the Google Visualization API is loaded.
-                    google.charts.setOnLoadCallback(drawChart);
-
-                    // Callback that creates and populates a data table,
-                    // instantiates the pie chart, passes in the data and
-                    // draws it.
-                });
-
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
 
         })
 
-        function drawChart(data) {
+        function drawChart(obj) {
+            var json;
+            $.post("Grafico/GraficoAlunosPorCidade")
+                .done(function (r) {
+                    GraficoRender(r);
+                });
+        }
 
-            // Create the data table.
+        function GraficoRender(json) {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Topping');
             data.addColumn('number', 'Slices');
-            data.addRows([
-                ['Mushrooms', 3],
-                ['Onions', 1],
-                ['Olives', 1],
-                ['Zucchini', 1],
-                ['Pepperoni', 2]
-            ]);
 
-            // Set chart options
+            $.map(json, function (n, i) {
+                data.addRow([n['cidade'], n['qtdalunos']])
+            });
+
             var options = {
                 'title': 'Alunos por Cidade',
                 'width': 600,
                 'height': 400
             };
 
-            // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
 
-        function getFormDataPadrao($form) {
-            var unindexed_array = $form;
-            var indexed_array = {};
+                //function getFormDataPadrao($form) {
+                //    var unindexed_array = $form;
+                //    var indexed_array = {};
 
-            $.map(unindexed_array, function (n, i) {
-                indexed_array[n['name']] = n['value'];
-            });
+                //    $.map(unindexed_array, function (n, i) {
+                //        indexed_array[n['cidade']] = n['qtdalunos'];
+                //    });
 
-            return indexed_array;
-        }
+                //    return indexed_array;
+                //}
     </script>
 }

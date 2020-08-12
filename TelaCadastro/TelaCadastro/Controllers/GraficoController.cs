@@ -36,5 +36,18 @@ namespace TelaCadastro.Controllers
 
             return Json(listaalunoscidade);
         }
+
+        //public JsonResult GraficoAlunosPorHora()
+        //{
+        //    var listaalunos = new AlunoDal().ObterTodos();
+
+        //    var listaalunoscidade = listaalunos.Select(ent => new
+        //    {
+        //         = ent.nome,
+        //        qtdalunos = listaenderecos.Count(x => x.cidadeid == ent.cidadeid)
+        //    });
+
+        //    return Json(listaalunoscidade);
+        //}
     }
 }
