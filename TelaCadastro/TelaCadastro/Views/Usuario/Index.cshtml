@@ -1,8 +1,6 @@
 ﻿@model TelaCadastro.ViewModels.UsuarioViewModel
-@{ 
-    Layout = null;
-    ViewBag.Title = "Cadastro de Usuário"; 
-}
+@{ Layout = null;
+                ViewBag.Title = "Cadastro de Usuário"; }
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +19,7 @@
             <h3> Cadastrar Usuário</h3>
             <hr />
 
-            @using (Html.BeginForm("Incluir", "Usuario", FormMethod.Post, new { @id = "formFiltros" }))
+            @using (Html.BeginForm("Incluir", "Usuario", FormMethod.Post, new { @id = "formFiltros", @onsubmit = "VerificarSenha()" }))
             {
 <div class="row">
     <div class="grid-6">
@@ -87,6 +85,21 @@
             $("#cpf").mask("999.999.999-99");
             $("#telefone").mask("(99)99999-9999");
         })
+
+        function VerificarSenha() {
+            var senha = $("#senha").val();
+            var confirmarsenha = $("#confirmarsenha").val();
+
+            if (senha != confirmarsenha) {
+                alert("As senhas não correspondem!")
+
+                $("#senha").val("");
+                $("#confirmarsenha").val("");
+
+                event.preventDefault();
+            }
+
+        }
     </script>
 </body>
 </html>
