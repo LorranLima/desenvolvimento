@@ -1,11 +1,21 @@
-﻿<html>
-<body>
-    @model TelaCadastro.ViewModels.UsuarioViewModel
-    @{ Layout = null;
-        ViewBag.Title = "Cadastro de Usuário"; }
-
+﻿@model TelaCadastro.ViewModels.UsuarioViewModel
+@{ 
+    Layout = null;
+    ViewBag.Title = "Cadastro de Usuário"; 
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Projeto Saeinfo</title>
+    @*@Styles.Render("~/content/css")*@
     <link href="~/Content/style/style.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
 
+</head>
+<body>
     <div class="container">
         <div class="painel">
             <h3> Cadastrar Usuário</h3>
@@ -65,9 +75,7 @@
                                                                         <button type="submit" class="botao botao-sucesso">Salvar</button>
                                                                         <button type="button" class="botao botao-primario" onclick="window.location.href='@Url.Action("Index","Login")'">Voltar</button>
                                                                     </div>
-                                                                </div>
-                                                                }
-
+                                                                </div>}
         </div>
     </div>
 

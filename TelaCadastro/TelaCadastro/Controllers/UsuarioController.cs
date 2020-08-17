@@ -59,9 +59,11 @@ namespace TelaCadastro.Controllers
                 {
                     return View("Index", "Usuario", viewmodel);
                 }
+
+                return RedirectToAction("Index", "Login");
             }
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Usuario");
         }
 
         public string RemoveMascara(string texto)
