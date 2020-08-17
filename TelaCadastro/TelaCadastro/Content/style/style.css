@@ -565,4 +565,21 @@ body {
 .card-padrao {
     background-color: #f2784b;
 }
+
+.abrir-modal {
+    display: block;
+    overflow-x: hidden;
+    opacity: 1;
+    z-index: 10050;
+    border-radius: 2px;
+    border: 0 !important;
+    outline: none;
+    overflow-y: auto !important;
+    position: fixed;
+    top: 129px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width:80%;
+}
 /*# sourceMappingURL=style.css.map */

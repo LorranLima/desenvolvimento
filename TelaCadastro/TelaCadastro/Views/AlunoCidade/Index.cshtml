@@ -58,9 +58,12 @@
     </div>
 </div>
 
-<div id="divTabelaAluno">
+<div class="abrir-modal" id="divTabelaAluno" style="display:none;">
 
 </div>
+@*<div id="divTabelaAluno">
+
+</div>*@
 
 @section Scripts{
 
@@ -152,6 +155,7 @@
             $.post("AlunoCidade/BuscarAlunos", { id: id })
                 .done(function (data) {
                     $("#divTabelaAluno").html(data);
+                    $("#divTabelaAluno").show();
                 });
         }
 
