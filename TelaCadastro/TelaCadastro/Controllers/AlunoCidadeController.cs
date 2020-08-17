@@ -89,6 +89,66 @@ namespace TelaCadastro.Controllers
             return View(grid);
         }
 
+        public ActionResult Ordenar(string campo, string ordem)
+        {
+
+            var listacidade = new CidadeDal().ObterTodos().ToList();
+
+            if (ordem == "cres")
+            {
+                switch (campo)
+                {
+                    case "cidadeid":
+                        listacidade = listacidade.OrderBy(ent => ent.cidadeid).ToList();
+                        break;
+                    case "nome":
+                        listacidade = listacidade.OrderBy(ent => ent.nome).ToList();
+                        break;
+                    case "estado":
+                        listacidade = listacidade.OrderBy(ent => ent.estado).ToList();
+                        break;
+                    case "cep":
+                        listacidade = listacidade.OrderBy(ent => ent.cep).ToList();
+                        break;
+                }
+
+            }
+            else
+            {
+                switch (campo)
+                {
+                    case "cidadeid":
+                        listacidade = listacidade.OrderByDescending(ent => ent.cidadeid).ToList();
+                        break;
+                    case "nome":
+                        listacidade = listacidade.OrderByDescending(ent => ent.nome).ToList();
+                        break;
+                    case "estado":
+                        listacidade = listacidade.OrderByDescending(ent => ent.estado).ToList();
+                        break;
+                    case "cep":
+                        listacidade = listacidade.OrderByDescending(ent => ent.cep).ToList();
+                        break;
+                }
+            }
+
+            var paginacao = StrToInt32(ConfigurationManager.AppSettings["PaginacaoPadrao"]);
+            var paginaAtual = 1;
+
+            int quantidade = listacidade.Count();
+
+            var grid = new TabelaGenerica<Cidade>
+            {
+                Dados = listacidade.ToList()
+              .Skip(paginacao * (paginaAtual - 1)).Take(paginacao > quantidade ? quantidade : paginacao).ToList(),
+                Paginacao = paginacao,
+                PaginaAtual = paginaAtual,
+                TotalRegistros = quantidade
+            };
+
+            return View("TabelaCidade", grid);
+        }
+
         public ActionResult BuscarAlunos(int id)
         {
 

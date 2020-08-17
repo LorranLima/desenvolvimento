@@ -147,5 +147,33 @@
             return valor != "" && valor != null && valor != undefined && valor != "undefined";
         }
 
+        function Ordenar(campo) {
+
+            var ordem = "desc";
+            var ultimocampo = localStorage.getItem("Ordenar");
+            var ultimaordem = localStorage.getItem("Ordem");
+
+            if (ultimocampo == campo) {
+                if (ultimaordem == "cres")
+                    ordem = "desc";
+                else
+                    ordem = "cres"
+            }
+
+            localStorage.setItem("Ordenar", campo);
+            localStorage.setItem("Ordem", ordem);
+
+            $.post("Cidade/Ordenar", { campo: campo, ordem: ordem }).done(function (data) {
+                $("#divTabela").html(data);
+            });
+        }
+
+        function mudarPagina(pagina) {
+            if (verificaValor(pagina)) {
+                $("#PaginaAtual").val(pagina);
+            }
+            filtrarGrid();
+        }
+
     </script>
 }

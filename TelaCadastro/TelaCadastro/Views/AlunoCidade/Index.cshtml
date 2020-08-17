@@ -61,9 +61,6 @@
 <div class="abrir-modal" id="divTabelaAluno" style="display:none;">
 
 </div>
-@*<div id="divTabelaAluno">
-
-</div>*@
 
 @section Scripts{
 
@@ -157,6 +154,38 @@
                     $("#divTabelaAluno").html(data);
                     $("#divTabelaAluno").show();
                 });
+        }
+
+        function Ordenar(campo) {
+
+            var ordem = "desc";
+            var ultimocampo = localStorage.getItem("Ordenar");
+            var ultimaordem = localStorage.getItem("Ordem");
+
+            if (ultimocampo == campo) {
+                if (ultimaordem == "cres")
+                    ordem = "desc";
+                else
+                    ordem = "cres"
+            }
+
+            localStorage.setItem("Ordenar", campo);
+            localStorage.setItem("Ordem", ordem);
+
+            $.post("AlunoCidade/Ordenar", { campo: campo, ordem: ordem }).done(function (data) {
+                $("#divTabela").html(data);
+            });
+        }
+
+        function mudarPagina(pagina) {
+            if (verificaValor(pagina)) {
+                $("#PaginaAtual").val(pagina);
+            }
+            filtrarGrid();
+        }
+
+        function FecharModal() {
+            $("#divTabelaAluno").hide();
         }
 
     </script>

@@ -8,18 +8,18 @@
     <thead class="tableHead">
         <tr>
             <th>#</th>
-            <th>Código</th>
-            <th>Nome</th>
-            <th>Cpf</th>
-            <th>Sexo</th>
-            <th>Telefone</th>
-            <th>Data de Cadastro</th>
-            <th>Cidade</th>
+            <th onclick="Ordenar('alunoid')">Código</th>
+            <th onclick="Ordenar('nome')">Nome</th>
+            <th onclick="Ordenar('cpf')">Cpf</th>
+            <th onclick="Ordenar('sexo')">Sexo</th>
+            <th onclick="Ordenar('telefone')">Telefone</th>
+            <th onclick="Ordenar('datacadastro')">Data de Cadastro</th>
+            <th onclick="Ordenar('cidade')">Cidade</th>
             <th></th>
         </tr>
     </thead>
     <tbody class="tableBody">
-        @foreach (var item in Model.Dados.OrderBy(ent => ent.nome))
+        @foreach (var item in Model.Dados)
         {
             <tr>
                 <td>@(cont = cont + 1)</td>

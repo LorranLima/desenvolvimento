@@ -1,10 +1,12 @@
 ﻿@model TelaCadastro.Util.TabelaGenerica<DAL.Model.Aluno>
-@{
-    Layout = null;
-    int cont = (Model.PaginaAtual - 1) * Model.Paginacao;
-}
+@{ Layout = null;
+    int cont = (Model.PaginaAtual - 1) * Model.Paginacao; }
 <div class="container">
-    <div class="painel">
+    <div class="painel modal-painel">
+        <button class="modal-fechar" onclick="FecharModal()">X</button>
+        <h2>Alunos</h2>
+        <hr />
+
         <div class="row">
             <table>
                 <thead class="tableHead">
@@ -23,17 +25,16 @@
                 <tbody class="tableBody">
                     @foreach (var item in Model.Dados.OrderBy(ent => ent.nome))
                     {
-                        <tr>
-                            <td>@(cont = cont + 1)</td>
-                            <td>@item.alunoid</td>
-                            <td>@item.nome</td>
-                            <td>@item.cpf</td>
-                            <td>@(item.sexo == "M" ? "Masculino" : item.sexo == "F" ? "Feminino" : "")</td>
-                            <td>@item.telefone</td>
-                            <td>@(item.datacadastro.HasValue ? item.datacadastro.Value.ToShortDateString() : "")</td>
-                            <td>@item.endereco.cidade.nome</td>
-                        </tr>
-                    }
+        <tr>
+            <td>@(cont = cont + 1)</td>
+            <td>@item.alunoid</td>
+            <td>@item.nome</td>
+            <td>@item.cpf</td>
+            <td>@(item.sexo == "M" ? "Masculino" : item.sexo == "F" ? "Feminino" : "")</td>
+            <td>@item.telefone</td>
+            <td>@(item.datacadastro.HasValue ? item.datacadastro.Value.ToShortDateString() : "")</td>
+            <td>@item.endereco.cidade.nome</td>
+        </tr>}
                 </tbody>
                 <tfoot>
                     <tr>

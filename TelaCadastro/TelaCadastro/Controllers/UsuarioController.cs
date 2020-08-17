@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using DAL.Model;
@@ -43,10 +44,10 @@ namespace TelaCadastro.Controllers
                     Usuario usuario = new Usuario
                     {
                         nome = viewmodel.nome,
-                        cpf = viewmodel.cpf,
+                        cpf = RemoveMascara(viewmodel.cpf),
                         cidadeid = viewmodel.cidadeid,
                         sexo = viewmodel.sexo,
-                        telefone = viewmodel.telefone,
+                        telefone = RemoveMascara(viewmodel.telefone),
                         email = viewmodel.email,
                         senha = viewmodel.senha,
                         datacadastro = DateTime.Now
@@ -63,6 +64,11 @@ namespace TelaCadastro.Controllers
             return RedirectToAction("Index", "Login");
         }
 
+        public string RemoveMascara(string texto)
+        {
+            return texto == null ? null : (Regex.Replace(texto, "[?\\)?\\(_./-]", "")).Replace(" ", "");
+        }
+
         public void PrepararViewBags()
         {
             Dictionary<string, string> listasexo = new Dictionary<string, string>();
@@ -72,7 +78,8 @@ namespace TelaCadastro.Controllers
 
             ViewBag.ListaSexo = new SelectList(listasexo, "Key", "Value");
 
-            var listacidade = new CidadeDal().ObterTodos().Select(ent => new {
+            var listacidade = new CidadeDal().ObterTodos().Select(ent => new
+            {
                 Key = ent.cidadeid,
                 Value = ent.nome + " - " + ent.estado
             });

@@ -576,10 +576,37 @@ body {
     outline: none;
     overflow-y: auto !important;
     position: fixed;
-    top: 129px;
+    top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    width:80%;
+    transition: opacity .15s linear;
+    background-color: rgba(10,23,55,0.5);   
+}
+
+.modal-painel {
+    width: 80%;
+    margin-top:100px;
+    margin-left: 121px;
+    margin-right: 121px;
+    background: #FFFFFF;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 4px -2px #989898;
+    -moz-box-shadow: 0 4px 4px -2px #989898;
+    -webkit-box-shadow: 0 4px 4px -2px #989898;
+}
+
+.modal-fechar {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+    border: 0;
+    outline: none;
+    cursor:pointer;
 }
 /*# sourceMappingURL=style.css.map */

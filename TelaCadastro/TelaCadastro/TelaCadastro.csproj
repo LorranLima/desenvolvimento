@@ -197,15 +197,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\scss\style.scss" />
-    <Content Include="Content\scss\_cardSeries.scss" />
-    <Content Include="Content\scss\_footer.scss" />
-    <Content Include="Content\scss\_geral.scss" />
-    <Content Include="Content\scss\_grid.scss" />
-    <Content Include="Content\scss\_navMenu.scss" />
-    <Content Include="Content\scss\_reset.scss" />
-    <Content Include="Content\scss\_tabela.scss" />
-    <Content Include="Content\scss\_variaveisMixins.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

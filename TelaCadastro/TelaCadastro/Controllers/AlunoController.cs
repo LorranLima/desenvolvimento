@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using DAL.Model;
 using DAL.Persistence;
+using Microsoft.SqlServer.Server;
 using TelaCadastro.Models;
 using TelaCadastro.Util;
 using TelaCadastro.ViewModels;
@@ -88,12 +89,89 @@ namespace TelaCadastro.Controllers
               .ToList()
               .Skip(paginacao * (paginaAtual - 1)).Take(paginacao > quantidade ? quantidade : paginacao).ToList(),
                 Paginacao = paginacao,
-                ClassesCss = "table table-hover",
                 PaginaAtual = paginaAtual,
                 TotalRegistros = quantidade
             };
 
             return View(grid);
+        }
+
+        public ActionResult Ordenar(string campo, string ordem)
+        {
+
+            var listaaluno = new AlunoDal().ObterTodos().ToList();
+
+            if (ordem == "cres")
+            {
+                switch (campo)
+                {
+                    case "alunoid":
+                        listaaluno = listaaluno.OrderBy(ent => ent.alunoid).ToList();
+                        break;
+                    case "nome":
+                        listaaluno = listaaluno.OrderBy(ent => ent.nome).ToList();
+                        break;
+                    case "cpf":
+                        listaaluno = listaaluno.OrderBy(ent => ent.cpf).ToList();
+                        break;
+                    case "sexo":
+                        listaaluno = listaaluno.OrderBy(ent => ent.sexo).ToList();
+                        break;
+                    case "telefone":
+                        listaaluno = listaaluno.OrderBy(ent => ent.telefone).ToList();
+                        break;
+                    case "datacadastro":
+                        listaaluno = listaaluno.OrderBy(ent => ent.datacadastro).ToList();
+                        break;
+                    case "cidade":
+                        listaaluno = listaaluno.OrderBy(ent => ent.endereco.cidade.nome).ToList();
+                        break;
+                }
+                
+            }
+            else
+            {
+                switch (campo)
+                {
+                    case "alunoid":
+                        listaaluno = listaaluno.OrderByDescending(ent => ent.alunoid).ToList();
+                        break;
+                    case "nome":
+                        listaaluno = listaaluno.OrderByDescending(ent => ent.nome).ToList();
+                        break;
+                    case "cpf":
+                        listaaluno = listaaluno.OrderByDescending(ent => ent.cpf).ToList();
+                        break;
+                    case "sexo":
+                        listaaluno = listaaluno.OrderByDescending(ent => ent.sexo).ToList();
+                        break;
+                    case "telefone":
+                        listaaluno = listaaluno.OrderByDescending(ent => ent.telefone).ToList();
+                        break;
+                    case "datacadastro":
+                        listaaluno = listaaluno.OrderByDescending(ent => ent.datacadastro).ToList();
+                        break;
+                    case "cidade":
+                        listaaluno = listaaluno.OrderByDescending(ent => ent.endereco.cidade.nome).ToList();
+                        break;
+                }
+            }
+
+            var paginacao = StrToInt32(ConfigurationManager.AppSettings["PaginacaoPadrao"]);
+            var paginaAtual = 1;
+
+            int quantidade = listaaluno.Count();
+
+            var grid = new TabelaGenerica<Aluno>
+            {
+                Dados = listaaluno.ToList()
+              .Skip(paginacao * (paginaAtual - 1)).Take(paginacao > quantidade ? quantidade : paginacao).ToList(),
+                Paginacao = paginacao,
+                PaginaAtual = paginaAtual,
+                TotalRegistros = quantidade
+            };
+
+            return View("TabelaAluno", grid);
         }
 
         public ActionResult Incluir()
@@ -162,7 +240,7 @@ namespace TelaCadastro.Controllers
 
                 serviceResponsavel.Incluir(responsavel);
 
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "Aluno");
             }
             else
             {
@@ -277,7 +355,7 @@ namespace TelaCadastro.Controllers
                     serviceResponsavel.Alterar(obj);
                 });
 
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "Aluno");
             }
             else
             {
@@ -399,7 +477,7 @@ namespace TelaCadastro.Controllers
                 EnderecoDal serviceEndereco = new EnderecoDal();
                 serviceEndereco.Excluir(ent => ent.enderecoid == viewmodel.enderecoid);
 
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "Aluno");
 
             }
             catch (Exception ex)
@@ -449,5 +527,6 @@ namespace TelaCadastro.Controllers
         {
             return texto == null ? null : (Regex.Replace(texto, "[?\\)?\\(_./-]", "")).Replace(" ", "");
         }
+
     }
 }

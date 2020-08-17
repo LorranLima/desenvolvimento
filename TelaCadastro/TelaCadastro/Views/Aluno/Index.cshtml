@@ -1,7 +1,5 @@
 ﻿@model TelaCadastro.Util.TabelaGenerica<DAL.Model.Aluno>
-@{
-    ViewBag.Title = "Cadastro - Aluno";
-}
+@{ ViewBag.Title = "Cadastro - Aluno"; }
 
 <div class="container">
     <div class="painel">
@@ -10,43 +8,42 @@
 
         @using (Html.BeginForm("TabelaAluno", "Aluno", FormMethod.Get, new { id = "formFiltros" }))
         {
-            @Html.Hidden("PaginaAtual")
-            @Html.Hidden("Paginacao")
+@Html.Hidden("PaginaAtual")
+                @Html.Hidden("Paginacao")
 
-            <div class="row">
-                <div class="grid-2">
-                    @Html.Label("codigo", "Código")
-                    @Html.TextBox("codigo", null, new { @class = "formulario-controle", type = "Number" })
-                </div>
-                <div class="grid-4">
-                    @Html.Label("nome", "Nome")
-                    @Html.TextBox("nome", null, new { @class = "formulario-controle" })
-                </div>
-                <div class="grid-2">
-                    @Html.Label("cpf", "CPF")
-                    @Html.TextBox("cpf", null, new { @class = "formulario-controle" })
-                </div>
-                <div class="grid-2">
-                    @Html.Label("datanascimento", "Data de Nascimento")
-                    @Html.TextBox("datanascimento", null, new { @class = "formulario-controle DatePicker" })
-                </div>
-                <div class="grid-2">
-                    @Html.Label("datacadastro", "Data de Cadastro")
-                    @Html.TextBox("datacadastro", null, new { @class = "formulario-controle DatePicker" })
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="grid-12">
-                    <button type="button" class="botao botao-primario" onclick="filtrarGrid(null, 'aluno');">
-                        Filtrar
-                    </button>
-                    <button type="button" class="botao botao-perigo" onclick="limparFiltros(null, 'aluno');">
-                        Limpar
-                    </button>
-                </div>
-            </div>
-        }
+                                <div class="row">
+                                    <div class="grid-2">
+                                        @Html.Label("codigo", "Código")
+                                        @Html.TextBox("codigo", null, new { @class = "formulario-controle", type = "Number" })
+                                    </div>
+                                    <div class="grid-4">
+                                        @Html.Label("nome", "Nome")
+                                        @Html.TextBox("nome", null, new { @class = "formulario-controle" })
+                                    </div>
+                                    <div class="grid-2">
+                                        @Html.Label("cpf", "CPF")
+                                        @Html.TextBox("cpf", null, new { @class = "formulario-controle" })
+                                    </div>
+                                    <div class="grid-2">
+                                        @Html.Label("datanascimento", "Data de Nascimento")
+                                        @Html.TextBox("datanascimento", null, new { @class = "formulario-controle DatePicker" })
+                                    </div>
+                                    <div class="grid-2">
+                                        @Html.Label("datacadastro", "Data de Cadastro")
+                                        @Html.TextBox("datacadastro", null, new { @class = "formulario-controle DatePicker" })
+                                    </div>
+                                </div>
+                                                <br />
+                                                                <div class="row">
+                                                                    <div class="grid-12">
+                                                                        <button type="button" class="botao botao-primario" onclick="filtrarGrid(null, 'aluno');">
+                                                                            Filtrar
+                                                                        </button>
+                                                                        <button type="button" class="botao botao-perigo" onclick="limparFiltros(null, 'aluno');">
+                                                                            Limpar
+                                                                        </button>
+                                                                    </div>
+                                                                </div>}
     </div>
 </div>
 <br />
@@ -157,6 +154,40 @@
         function verificaValor(valor) {
             return valor != "" && valor != null && valor != undefined && valor != "undefined";
         }
+
+        function Ordenar(campo) {
+
+            var ordem = "desc";
+            var ultimocampo = localStorage.getItem("Ordenar");
+            var ultimaordem = localStorage.getItem("Ordem");
+
+            if (ultimocampo == campo) {
+                if (ultimaordem == "cres")
+                    ordem = "desc";
+                else
+                    ordem = "cres"
+            }
+
+            localStorage.setItem("Ordenar", campo);
+            localStorage.setItem("Ordem", ordem);
+
+            $.post("Aluno/Ordenar", { campo: campo, ordem: ordem }).done(function (data) {
+                $("#divTabela").html(data);
+            });
+        }
+
+        function mudarPagina(pagina) {
+            if (verificaValor(pagina)) {
+                $("#PaginaAtual").val(pagina);
+            }
+            filtrarGrid();
+        }
+
+        //function mudarPaginacao(paginacao) {
+        //    $("#PaginaAtual").val(1);
+        //    $("#Paginacao").val(paginacao);
+        //    filtrarGrid();
+        //}
 
     </script>
 }

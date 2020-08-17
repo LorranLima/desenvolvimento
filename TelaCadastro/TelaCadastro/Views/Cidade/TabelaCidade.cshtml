@@ -7,15 +7,15 @@
     <thead class="tableHead">
         <tr>
             <th>#</th>
-            <th>Código</th>
-            <th>Nome</th>
-            <th>Estado</th>
-            <th>Cep</th>
+            <th onclick="Ordenar('cidadeid')">Código</th>
+            <th onclick="Ordenar('nome')")>Nome</th>
+            <th onclick="Ordenar('estado')">Estado</th>
+            <th onclick="Ordenar('cep')">Cep</th>
             <th></th>
         </tr>
     </thead>
     <tbody class="tableBody">
-        @foreach (var item in Model.Dados.OrderBy(ent => ent.nome))
+        @foreach (var item in Model.Dados)
         {
             <tr>
                 <td>@(cont = cont + 1)</td>
